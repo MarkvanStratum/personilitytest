@@ -76,7 +76,7 @@ app.get('/c/:token',async(req,res)=>{try{
  let html=await (await import('node:fs/promises')).readFile(path.join(root,'public',checkoutFile),'utf8');
  const bootstrap='<script>window.PROMO_CHECKOUT_TOKEN='+JSON.stringify(req.params.token)+'</script>';
  html=html.replace(/<head\b[^>]*>/i,m=>m+bootstrap);
- res.set('Cache-Control','no-store');res.type('html').send(html);
+ res.set('Cache-Control','no-store');res.set('X-Robots-Tag','noindex, nofollow');res.type('html').send(html);
  }catch(e){console.error(e);res.status(500).send('Checkout unavailable')}});
 app.get('/api/checkout-link/:token',async(req,res)=>{try{
  const link=await checkoutLink(req.params.token,req);
@@ -111,5 +111,6 @@ app.get('/api/stripe/payment-status',async(req,res)=>{try{
  if(status!=='paid'&&stripe_intent&&stripe){const intent=await stripe.paymentIntents.retrieve(stripe_intent);if(intent.status==='succeeded'){await finalizePayment(intent);status='paid'}}
  res.set('Cache-Control','no-store');res.json({status,plan});
  }catch(e){console.error('Payment status error',e);res.status(500).json({error:'Unable to check payment status'})}});
-app.get('/',async(req,res,next)=>{try{const id=await checkoutAssessment(req);if(id)return res.redirect('/results.html?id='+encodeURIComponent(id));next()}catch(e){next(e)}});app.use(express.static(path.join(root,'public'),{extensions:['html']}));app.get('/health',(_req,res)=>res.json({ok:true}));app.use((err,req,res,next)=>{console.error(err);res.status(500).json({error:'Server error'})});
+// Public homepage stays indexable; existing result links remain available through /results.html.
+app.use('/api',(req,res,next)=>{res.set('X-Robots-Tag','noindex, nofollow');next()});app.use(express.static(path.join(root,'public'),{extensions:['html']}));app.get('/health',(_req,res)=>res.json({ok:true}));app.use((err,req,res,next)=>{console.error(err);res.status(500).json({error:'Server error'})});
 init().then(()=>app.listen(process.env.PORT||3000,'0.0.0.0',()=>console.log('Personality website ready'))).catch(e=>{console.error('Database initialization failed',e);process.exit(1)});

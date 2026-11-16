@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /c/
+Disallow: /results.html
+Disallow: /external-checkout.html
+Disallow: /xo-dif-al1.html
+Sitemap: https://16personalities.eu/sitemap.xml
