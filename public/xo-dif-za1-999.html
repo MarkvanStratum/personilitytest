@@ -371,7 +371,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
    const data=await jsonFetch('/api/create-promo-checkout-link',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-     plan:'3795',step2File:'xo-dif-za1.html',sourcePage:location.pathname,
+     plan:'3795',step2File:'xo-dif-za1-999.html',sourcePage:location.pathname,
      ref:qs.get('ref')||'',originalQueryString:location.search.slice(1)
     })
    });
@@ -418,7 +418,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
      throw new Error('Payment not completed.');
     }
     if(await waitForPaid(payment.reference)){
-    location.assign('https://cudsr.bemobtrcks.com/go/f6ea7b90-4dfb-4b2a-b530-9c788795c1c0?');
+    location.assign('https://cudsr.bemobtrcks.com/go/ca9c7660-ef5e-45bd-9256-4f6250ae4e4e');
 }
 
 else{
