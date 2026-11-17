@@ -135,7 +135,7 @@ app.post('/api/stripe/create-payment-intent',async(req,res)=>{try{
    if(!offer)return res.status(409).json({error:'External offer unavailable'});
    const reference=crypto.randomUUID();
    await query('INSERT INTO external_checkout_orders(id,checkout_token,template,amount,currency,status) VALUES($1,$2,$3,$4,$5,$6)',[reference,checkoutToken,link.step2_file,offer.amount,offer.currency,'creating']);
-   const intent=await stripe.paymentIntents.create({amount:offer.amount,currency:offer.currency,payment_method_types:['card'],metadata:{flow:'external',reference,checkoutToken,template:link.step2_file},description:offer.name},{idempotencyKey:reference});
+   const intent=await stripe.paymentIntents.create({amount:offer.amount,currency:offer.currency,payment_method_types:['card'],metadata:{flow:'external',reference,checkoutToken,template:link.step2_file},description:'Personality Discovery — '+PLANS[plan].name},{idempotencyKey:reference});
    await query("UPDATE external_checkout_orders SET stripe_intent=$1,status='pending' WHERE id=$2 AND status='creating'",[intent.id,reference]);
    res.set('Cache-Control','no-store');return res.json({clientSecret:intent.client_secret,reference});
  }

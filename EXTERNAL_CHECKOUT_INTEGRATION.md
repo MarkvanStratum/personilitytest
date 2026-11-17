@@ -16,3 +16,5 @@ Environment variables: `DATABASE_URL`, `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_
 
 
 Ultimate pricing rule: every external checkout selecting the `ultimate` / `3795` plan charges GBP £37.95 (3795 pence), regardless of template or `EXTERNAL_CHECKOUT_OFFERS_JSON`. The starter plan remains GBP £22.95 for website checkout. Verify Stripe test-mode PaymentIntent before accepting live payments.
+
+Stripe PaymentIntent descriptions use the same plan names for external and website checkouts: Starter = `Personality Discovery — Personality Report`; Ultimate = `Personality Discovery — Personal Growth Plus`.
