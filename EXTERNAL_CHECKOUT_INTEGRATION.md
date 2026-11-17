@@ -2,7 +2,7 @@
 
 Website assessment payments remain assessment-bound and use GBP £22.95 / £37.95. Existing report entitlements and the Stripe webhook remain unchanged.
 
-External HTML templates may be added without a fixed count. Put each file in `public/` and configure its exact server-side amount/currency/product via `EXTERNAL_CHECKOUT_OFFERS_JSON`. Templates must exist and be configured; an arbitrary filename does not authorize a charge. The included `xo-dif-za1-999.html` is configured as **ZAR 32.00**, and `xo-dif-al1.html` as GBP 37.95 when used without an assessment. No amount is accepted from the browser. Example environment variable:
+External HTML templates may be added without a fixed count. Put each file in `public/` and configure its exact server-side amount/currency/product via `EXTERNAL_CHECKOUT_OFFERS_JSON`. Templates must exist and be configured; an arbitrary filename does not authorize a charge. The included `xo-dif-za1-999.html` is configured as **GBP 37.95**, and `xo-dif-al1.html` as GBP 37.95 when used without an assessment. No amount is accepted from the browser. Example environment variable:
 
 `EXTERNAL_CHECKOUT_OFFERS_JSON={"xo-dif-mx1-999.html":{"amount":99900,"currency":"mxn","label":"MX$999.00","name":"Your actual digital product"}}`
 
@@ -13,3 +13,6 @@ Routes: `POST /api/create-promo-checkout-link`, `GET /c/:token`, `GET /api/check
 Environment variables: `DATABASE_URL`, `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`, `NODE_ENV=production`, plus `EXTERNAL_CHECKOUT_OFFERS_JSON` for additional products. Use Stripe test mode before live processing. Webhook events: `payment_intent.succeeded`, `payment_intent.payment_failed`, `payment_intent.canceled`.
 
 **Important:** External checkout charges are recorded independently of personality assessments and do not grant a personality report. The supplied South Africa page redirects after verified payment to its original BeMob destination. Make sure that destination actually fulfills the purchased product. Assessment purchase flow remains subject to `CONSULTATION_ENABLED` for the Growth Plus plan. Do not take live payments until the advertised products/services and fulfillment are accurate and tested.
+
+
+Ultimate pricing rule: every external checkout selecting the `ultimate` / `3795` plan charges GBP £37.95 (3795 pence), regardless of template or `EXTERNAL_CHECKOUT_OFFERS_JSON`. The starter plan remains GBP £22.95 for website checkout. Verify Stripe test-mode PaymentIntent before accepting live payments.

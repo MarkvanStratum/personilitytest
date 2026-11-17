@@ -18,7 +18,7 @@ const checkoutFile='xo-dif-al1.html';
 // External pages may be added without a fixed count. Each must be deployed under public/.
 // External products are priced server-side, never from query parameters or HTML.
 const EXTERNAL_OFFERS = {
-  'xo-dif-za1-999.html': {amount:3200,currency:'zar',label:'R32',name:'External digital offer'},
+  'xo-dif-za1-999.html': {amount:3795,currency:'gbp',label:'£37.95 GBP',name:'External digital offer'},
   'xo-dif-al1.html': {amount:3795,currency:'gbp',label:'£37.95 GBP',name:'Personality Growth Plus'}
 };
 // Optional JSON map of additional filenames to {amount,currency,label,name}; no numerical limit.
@@ -32,7 +32,7 @@ if(process.env.EXTERNAL_CHECKOUT_OFFERS_JSON){
 const externalCookieOptions={httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax',path:'/',maxAge:30*60*1000};
 function validTemplate(x){return typeof x==='string'&&/^[a-zA-Z0-9_-]+\.html$/.test(x)}
 async function templateExists(filename){try{const st=await fs.stat(path.join(root,'public',filename));return st.isFile()}catch{return false}}
-function externalOffer(filename){return EXTERNAL_OFFERS[filename]||null}
+function externalOffer(filename,plan){const offer=EXTERNAL_OFFERS[filename]||null;if(!offer)return null;return plan==='premium'?{...offer,amount:3795,currency:'gbp',label:'£37.95 GBP'}:offer}
 function externalSession(req){return typeof req.cookies.external_checkout_session==='string'&&/^[a-f0-9]{64}$/.test(req.cookies.external_checkout_session)?req.cookies.external_checkout_session:null}
 
 const cookieOpts={httpOnly:true,sameSite:'lax',secure:process.env.NODE_ENV==='production',path:'/',maxAge:1000*60*60*24*30};
@@ -47,6 +47,14 @@ async function finalizePayment(intent){
  if(intent.status!=='succeeded')return;
  const ref=intent.metadata?.reference;
  if(!cleanId(ref))throw Error('Missing payment reference');
+ if(intent.metadata?.flow==='external'){
+  const external=await query('SELECT * FROM external_checkout_orders WHERE id=$1 AND stripe_intent=$2',[ref,intent.id]);
+  if(!external.rowCount)throw Error('Unknown external payment');
+  const order=external.rows[0];
+  if(order.checkout_token!==intent.metadata?.checkoutToken||order.template!==intent.metadata?.template||order.amount!==intent.amount||order.currency!==intent.currency)throw Error('External payment verification mismatch');
+  await query("UPDATE external_checkout_orders SET status='paid' WHERE id=$1 AND status IN ('pending','creating')",[ref]);
+  return;
+ }
  const r=await query('SELECT * FROM purchases WHERE id=$1 AND stripe_intent=$2',[ref,intent.id]);
  if(!r.rowCount)throw Error('Unknown payment');
  const purchase=r.rows[0];
@@ -89,7 +97,7 @@ app.post('/api/create-promo-checkout-link',async(req,res)=>{try{
  // Website checkout remains assessment-bound. External templates are standalone.
  const isWebsite=step2File===checkoutFile&&!!id;
  if(isWebsite&&plan==='premium'&&process.env.CONSULTATION_ENABLED!=='true')return res.status(409).json({error:'Growth Plus consultations are not available yet'});
- if(!isWebsite&&!externalOffer(step2File))return res.status(400).json({error:'External offer is not configured for this template'});
+ if(!isWebsite&&!externalOffer(step2File,plan))return res.status(400).json({error:'External offer is not configured for this template'});
  let sess=externalSession(req);
  if(!isWebsite&&!sess){sess=token();res.cookie('external_checkout_session',sess,externalCookieOptions)}
  const checkoutToken=crypto.randomBytes(18).toString('base64url');
@@ -109,7 +117,7 @@ app.get('/api/checkout-link/:token',async(req,res)=>{try{
  const link=await checkoutLink(req.params.token,req);
  if(!link)return res.status(404).json({error:'Checkout link expired or unavailable'});
  const isExternal=!link.assessment_id;
- const offer=isExternal?externalOffer(link.step2_file):null;
+ const offer=isExternal?externalOffer(link.step2_file,link.plan):null;
  if(isExternal&&!offer)return res.status(409).json({error:'External offer unavailable'});
  res.set('Cache-Control','no-store');
  res.json({plan:link.plan==='premium'?'ultimate':'starter',step2File:link.step2_file,external:isExternal,amount:offer?.amount??PLANS[link.plan].amount,currency:offer?.currency??'gbp',displayPrice:offer?.label??(PLANS[link.plan].amount/100).toFixed(2)+' GBP',assessmentId:link.assessment_id||null});
@@ -123,7 +131,7 @@ app.post('/api/stripe/create-payment-intent',async(req,res)=>{try{
  if(checkoutToken&&!link)return res.status(403).json({error:'Checkout session expired'});
  if(link&&!link.assessment_id){
    if(link.plan!==plan)return res.status(400).json({error:'Invalid plan for checkout'});
-   const offer=externalOffer(link.step2_file);
+   const offer=externalOffer(link.step2_file,link.plan);
    if(!offer)return res.status(409).json({error:'External offer unavailable'});
    const reference=crypto.randomUUID();
    await query('INSERT INTO external_checkout_orders(id,checkout_token,template,amount,currency,status) VALUES($1,$2,$3,$4,$5,$6)',[reference,checkoutToken,link.step2_file,offer.amount,offer.currency,'creating']);
