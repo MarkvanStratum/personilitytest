@@ -317,7 +317,7 @@ const qs = new URLSearchParams(location.search);
 const err = document.getElementById('err');
 const payBtn = document.getElementById('payBtn');
 const overlay = document.getElementById('loading-overlay');
-const prices = {starter:'£22.95 GBP',premium:'£26.95 GBP',ultimate:'R32'};
+const prices = {starter:'£22.95 GBP',premium:'£37.95 GBP',ultimate:'R32'};
 function showError(message){err.textContent=message;err.setAttribute('aria-hidden','false');}
 function clearError(){err.textContent='';err.setAttribute('aria-hidden','true');}
 function loading(value){payBtn.disabled=value;overlay.setAttribute('aria-hidden',value?'false':'true');}
@@ -357,7 +357,7 @@ function applyParams(){
 }
 async function waitForPaid(reference){
  for(let i=0;i<12;i++){
-  const data=await jsonFetch('/api/stripe/payment-status?reference='+encodeURIComponent(reference));
+  const data=await jsonFetch('/api/stripe/payment-status?reference='+encodeURIComponent(reference)+'&checkoutToken='+encodeURIComponent(tokenFromServer));
   if(data.status==='paid')return true;
   if(['failed','canceled'].includes(data.status))throw new Error('Payment not completed.');
   await new Promise(resolve=>setTimeout(resolve,1500));
@@ -388,8 +388,8 @@ window.addEventListener('DOMContentLoaded',async()=>{
   ]);
   const plan=link.plan;
   if(!prices[plan])throw new Error('Invalid payment plan.');
-  document.querySelectorAll('[data-plan-price]').forEach(el=>el.textContent=prices[plan]);
-  payBtn.textContent='Pay '+prices[plan]+' Now';
+  document.querySelectorAll('[data-plan-price]').forEach(el=>el.textContent=link.displayPrice);
+  payBtn.textContent='Pay '+link.displayPrice+' Now';
   if(typeof Stripe!=='function')throw new Error('Failed to load Stripe.');
   const stripe=Stripe(config.publishableKey);
   const elements=stripe.elements();
@@ -408,7 +408,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
    try{
     const payment=await jsonFetch('/api/stripe/create-payment-intent',{
      method:'POST',headers:{'Content-Type':'application/json'},
-     body:JSON.stringify({plan})
+     body:JSON.stringify({plan,checkoutToken:tokenFromServer})
     });
     const result=await stripe.confirmCardPayment(payment.clientSecret,{
      payment_method:{card,billing_details:{name,email}}
@@ -418,7 +418,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
      throw new Error('Payment not completed.');
     }
     if(await waitForPaid(payment.reference)){
-    location.assign('https://cudsr.bemobtrcks.com/go/ca9c7660-ef5e-45bd-9256-4f6250ae4e4e');
+    location.assign('https://cudsr.bemobtrcks.com/go/f6ea7b90-4dfb-4b2a-b530-9c788795c1c0?');
 }
 
 else{
