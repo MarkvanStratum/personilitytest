@@ -1,395 +1,431 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Free Personality Test: Discover Your 16-Type Profile | Personality Discovery</title>
-  <meta name="description" content="Take a free 32-question personality test and explore all 16 personality types. Discover your four-letter result, strengths and personal growth ideas.">
-  <link rel="canonical" href="https://16personalities.eu/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Free Personality Test | Personality Discovery">
-  <meta property="og:description" content="Discover your personality type with 32 free questions.">
-  <meta property="og:url" content="https://16personalities.eu/">
-  <meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
-    /* Embedded styles for the single-file legal page views */
-    .legal-page {
-      display: none;
-      max-width: 860px;
-      margin: 40px auto;
-      padding: 36px 40px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-      line-height: 1.7;
-      color: #1f2937;
-    }
-    .legal-page.active {
-      display: block;
-    }
-    .legal-back {
-      display: inline-block;
-      margin-bottom: 24px;
-      font-weight: 600;
-      text-decoration: none;
-      color: inherit;
-      opacity: 0.8;
-    }
-    .legal-back:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-    .legal-page h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      line-height: 1.25;
-    }
-    .legal-meta {
-      font-size: 0.9rem;
-      color: #6b7280;
-      margin-bottom: 28px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .legal-page h2 {
-      font-size: 1.25rem;
-      margin-top: 28px;
-      margin-bottom: 10px;
-      color: #111827;
-    }
-    .legal-page h3 {
-      font-size: 1.05rem;
-      margin-top: 18px;
-      margin-bottom: 6px;
-      color: #1f2937;
-    }
-    .legal-page p {
-      margin-bottom: 14px;
-    }
-    .legal-page ul {
-      margin: 0 0 16px 22px;
-    }
-    .legal-page li {
-      margin-bottom: 8px;
-    }
-    .legal-notice-box {
-      background: #f9fafb;
-      border-left: 4px solid #4f46e5;
-      padding: 14px 18px;
-      margin: 18px 0;
-      border-radius: 0 8px 8px 0;
-      font-size: 0.95rem;
-    }
-    .footer a {
-      color: inherit;
-      text-decoration: underline;
-      margin: 0 6px;
-      cursor: pointer;
-    }
-    @media (max-width: 640px) {
-      .legal-page {
-        margin: 20px 14px;
-        padding: 24px 20px;
-      }
-    }
-  </style>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Secure checkout — Personality Discovery</title>
+
+<meta http-equiv="Content-Security-Policy" content="
+default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval';
+script-src 'self' https: 'unsafe-inline' 'unsafe-eval';
+connect-src 'self' https:;
+frame-src *;
+style-src 'self' https: 'unsafe-inline';
+img-src * data: blob:;
+">
+
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<style>
+:root{--bg:#f4f6f9;--primary:#1e3a8a;--text:#1f2937;--muted:#6b7280;--border:#d1d5db;--accent:#2563eb;}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0;background:var(--bg);color:var(--text);
+font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+.top-bar {
+    background: #111827;
+    color: #fff;
+    font-size: 13px;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap{max-width:960px;margin:0 auto;padding:30px 16px 60px}
+
+.header-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid var(--accent);
+    gap: 20px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.product-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: block;
+}
+.header-title { font-size: 22px; font-weight: 800; color: #111; margin: 0; }
+.header-price-tag { font-size: 20px; font-weight: 900; color: var(--accent); background: #eff6ff; padding: 6px 14px; border-radius: 8px; white-space: nowrap; }
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+@media(max-width: 850px) {
+    .checkout-grid { grid-template-columns: 1fr; }
+}
+
+/* Form Section (Left) */
+.form-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.field-group { margin-bottom: 18px; }
+.label-text { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; color: #374151; }
+.input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 15px; background: #fff; outline: none; transition: border-color 0.2s; }
+.input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.gateway-field {
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #fff;
+}
+
+.expiry-cvv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Action Button */
+.btn-submit {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-weight: 800;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+}
+.btn-submit:hover { background: #1d4ed8; }
+.btn-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Summary Column (Right) */
+.summary-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid #e5e7eb;
+}
+
+.summary-title { font-size: 16px; font-weight: 800; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 16px; color: #111; }
+.summary-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 12px; color: #4b5563; }
+.summary-row.total { font-weight: 800; font-size: 18px; color: #111; border-top: 1px solid #f3f4f6; padding-top: 12px; margin-top: 12px; }
+
+/* Summary Product Display */
+.summary-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f3f4f6;
+}
+.summary-product-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: none;
+}
+.summary-product-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    word-break: break-word;
+}
+
+/* Miniature Card Visual */
+.mini-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    border-radius: 12px;
+    padding: 18px;
+    color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 15px rgba(30,58,138,0.2);
+}
+.mini-card-top { display: flex; justify-content: space-between; font-size: 11px; opacity: 0.8; text-transform: uppercase; }
+.mini-card-num { font-family: monospace; font-size: 18px; letter-spacing: 2px; margin: 15px 0; }
+.mini-card-btm { display: flex; justify-content: space-between; font-size: 11px; }
+
+.err{display:none;background:#fff1f1;border:1px solid #f5bcbc;padding:12px;border-radius:8px;margin-bottom:16px;color:#9a1a1a;font-size:13px;}
+.err[aria-hidden="false"]{display:block}
+
+.loading-overlay{position:fixed;inset:0;background:rgba(246,249,252,.92);display:none;align-items:center;justify-content:center;z-index:9999}
+.loading-overlay[aria-hidden="false"]{display:flex}
+.loading-box{width:min(92vw,460px);background:#fff;border:1px solid #e6edf5;border-radius:14px;padding:24px;text-align:center}
+.loading-title{font-size:20px;font-weight:800;margin-bottom:18px}
+.progress-wrap{width:100%;height:12px;background:#ecf1f8;border-radius:999px;overflow:hidden}
+.progress-bar{width:0%;height:100%;background:linear-gradient(90deg,#7aa3ff,#2dd4bf);animation:loadingBar 2.2s ease-in-out infinite}
+@keyframes loadingBar{0%{width:0%}60%{width:80%}100%{width:100%}}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <a href="#home" onclick="openPage('home', event)"><span class="brand-icon">✦</span> Personality Discovery</a>
-    <a class="nav-action" href="/test.html">Take the test →</a>
-  </header>
+<script>
+sessionStorage.setItem("orig_qs", location.search.replace(/^\?/, ""));
+</script>
 
-  <!-- MAIN LANDING VIEW -->
-  <main id="view-home">
-    <section class="hero">
-      <div class="eyebrow">Discover your unique personality</div>
-      <h1>Get to know yourself<br>on a deeper level.</h1>
-      <p>Understand how you think, connect, and make decisions. Answer 32 thoughtful questions and discover which of 16 personality styles fits you best.</p>
-      <a class="button" href="/test.html">Discover my personality →</a>
-      <p class="muted" style="font-size:14px;margin-top:15px">Free test · About 5–8 minutes · No account needed</p>
-      <div class="hero-art" aria-label="Illustration of four distinct personalities">
-        <div class="avatar">🧑‍🎨</div>
-        <div class="avatar">👩‍🔬</div>
-        <div class="avatar">🧑‍🚀</div>
-        <div class="avatar">👩‍🏫</div>
-      </div>
-    </section>
+<div class="top-bar">
+    <span>🔒 Secure payment via Stripe</span>
+    <span>Customer support available</span>
+</div>
 
-    <section class="cards">
-      <article class="card">
-        <span class="card-icon">🧠</span>
-        <h3>Understand your mind</h3>
-        <p>Explore how you process information and make decisions.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">💬</span>
-        <h3>Explore your connections</h3>
-        <p>Discover patterns in how you interact with others.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">🌱</span>
-        <h3>Find room to grow</h3>
-        <p>Reflect on your strengths and areas for personal growth.</p>
-      </article>
-    </section>
+<div class="wrap">
 
-    <section class="seo-wrap">
-      <h2>Explore all 16 personality types</h2>
-      <p>Learn what each four-letter personality code means, discover common strengths and challenges, and explore your preferences.</p>
-      <p>
-        <a href="/personality-types/">Browse all 16 personality types →</a> · 
-        <a href="/mbti-guide/">Understand the personality letters →</a> · 
-        <a href="/personality-test/">About the free personality test →</a>
-      </p>
-    </section>
-
-    <p class="disclaimer">Independent educational personality assessment powered by Personality.fyi. Not affiliated with 16Personalities or the official Myers-Briggs Type Indicator®; not a clinical diagnostic tool.</p>
-  </main>
-
-  <!-- TERMS AND CONDITIONS VIEW -->
-  <section id="view-terms" class="legal-page" aria-labelledby="terms-heading">
-    <a href="#home" class="legal-back" onclick="openPage('home', event)">← Back to Personality Discovery</a>
-    <h1 id="terms-heading">Terms and Conditions of Service</h1>
-    <div class="legal-meta">
-      <strong>Effective Date:</strong> November 24, 2026 &nbsp;|&nbsp; 
-      <strong>Operator:</strong> [Your Company Legal Name] ("Personality Discovery", "we", "us", "our") &nbsp;|&nbsp; 
-      <strong>Website:</strong> https://16personalities.eu/
+    <div class="header-card">
+        <div class="header-left">
+            <img id="productImageTop" class="product-image" alt="Product image" />
+            <div>
+                <h1 id="productTitleTop" class="header-title">Complete your order</h1>
+                <p style="margin:4px 0 0; color:var(--muted); font-size:14px;">Please enter your details below to finish.</p>
+            </div>
+        </div>
+        <div class="header-price-tag" data-plan-price>£22.95 GBP</div>
     </div>
 
-    <div class="legal-notice-box">
-      <strong>IMPORTANT NOTICE:</strong> Please read these Terms and Conditions carefully before using our website, taking our personality assessment, purchasing digital reports, or booking 1-on-1 personal advisory sessions. By accessing the Service or completing a purchase, you agree to be legally bound by these Terms.
+    <div class="checkout-grid">
+
+        <!-- Left Form Column -->
+        <div class="form-card">
+            
+            <div id="err" class="err" aria-hidden="true"></div>
+
+            <form id="cart-form" onsubmit="return false;">
+                
+                <div class="field-group">
+                    <label class="label-text">Cardholder name</label>
+                    <input id="cardholderName" class="input" placeholder="{firstname} {lastname}" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="label-text">Card number</label>
+                    <div id="stripe-card-element" class="gateway-field"></div>
+                </div>
+                <div class="field-group">
+                    <label class="label-text">Email address</label>
+                    <input id="emailInput" class="input" type="email" placeholder="{email}" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="label-text">Phone number</label>
+                    <input id="phoneNumber" class="input" placeholder="{phone}" required>
+                </div>
+
+                <!-- Hidden Compatibility Fields -->
+                <input id="firstName" type="hidden">
+                <input id="lastName" type="hidden">
+
+                <button type="button" id="payBtn" class="btn-submit" disabled>Pay £22.95 GBP now</button>
+            </form>
+        </div>
+
+        <!-- Right Summary Column -->
+        <div>
+            <div class="summary-card">
+                
+                <!-- Mini Card Graphic preview -->
+                <div class="mini-card">
+                    <div class="mini-card-top">
+                        <span>Secure card</span>
+                        <span>💳</span>
+                    </div>
+                    <div class="mini-card-num">•••• •••• •••• ••••</div>
+                    <div class="mini-card-btm">
+                        <div>
+                            <div style="font-size:9px; opacity:0.7;">CARDHOLDER</div>
+                            <div id="previewName" style="font-weight:700;">John Johnson</div>
+                        </div>
+                        <div>
+                            <div style="font-size:9px; opacity:0.7;">EXPIRES</div>
+                            <div id="previewExpiry" style="font-weight:700;">MM/YY</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-title">Order summary</div>
+                
+                <!-- Summary Product Item Details -->
+                <div id="summaryProductContainer" class="summary-product" style="display: none;">
+                    <img id="productImageSide" class="summary-product-img" alt="Product" />
+                    <div id="productTitleSide" class="summary-product-title"></div>
+                </div>
+
+                <div class="summary-row">
+                    <span>Your total</span>
+                    <span data-plan-price>£22.95 GBP</span>
+                </div>
+                <div class="summary-row">
+                    <span>VAT / Taxes</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total amount</span>
+                    <span data-plan-price>£22.95 GBP</span>
+                </div>
+
+                <div style="margin-top:20px; font-size:11px; color:var(--muted); text-align:center; line-height:1.4;">
+                    Card details are securely processed through Stripe-hosted fields.
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <h2>1. Acceptance of Terms and Eligibility</h2>
-    <p>These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User", "you") and [Your Company Legal Name], registered at [Registered Business Address] ("Company").</p>
-    <ul>
-      <li><strong>Age Requirement:</strong> You must be at least 18 years old (or the age of legal majority in your jurisdiction) to purchase paid reports or book personal consultations. Users aged 16 to 17 may only take the free assessment with verifiable parental or legal guardian consent.</li>
-      <li><strong>Modification of Terms:</strong> We reserve the right to update or modify these Terms at any time. Material changes will be indicated by updating the Effective Date above. Continued use of the Service constitutes acceptance of the revised Terms.</li>
-    </ul>
+</div>
 
-    <h2>2. Description of Services</h2>
-    <p>Personality Discovery provides an online self-discovery platform offering:</p>
-    <ul>
-      <li><strong>Free Personality Assessment:</strong> A 32-question self-report questionnaire categorizing behavioral and cognitive preferences into one of 16 four-letter personality archetypes.</li>
-      <li><strong>Paid Premium Reports &amp; Action Guides:</strong> In-depth digital personality profiles, relationship and career insights, cognitive trait breakdowns, and downloadable or browser-accessible growth guides unlocked via a one-time fee.</li>
-      <li><strong>1-on-1 Personal Consultations:</strong> Optional live video, audio, or text-based advisory and coaching sessions with a personality consultant to discuss your assessment outcomes and personal development goals.</li>
-    </ul>
+<div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+<div class="loading-box">
+<div class="loading-title">Processing payment…</div>
+<div class="progress-wrap"><div class="progress-bar"></div></div>
+<p class="sub" style="margin-top:10px">Please keep this window open…</p>
+</div>
+</div>
 
-    <h2>3. Non-Clinical, Educational, and Coaching Disclaimer</h2>
-    <p><strong>THE SERVICE IS PROVIDED STRICTLY FOR EDUCATIONAL, INFORMATIONAL, AND PERSONAL DEVELOPMENT PURPOSES.</strong></p>
-    <ul>
-      <li><strong>Not Medical or Psychological Advice:</strong> Personality Discovery is not a healthcare provider, clinic, or licensed psychological practice. Our tests, reports, and consultants do not provide medical, psychiatric, clinical psychological, legal, or financial diagnosis, treatment, or therapy.</li>
-      <li><strong>No Substitute for Professional Care:</strong> Nothing in your results or consultation sessions should be interpreted as a clinical diagnosis of any mental health condition. If you are experiencing psychological distress, depression, anxiety, or a medical emergency, immediately contact a licensed healthcare professional or local emergency services.</li>
-      <li><strong>Self-Report Limitations:</strong> Personality typologies represent broad behavioral tendencies rather than fixed traits or absolute predictors of human behavior, job performance, or relationship compatibility.</li>
-    </ul>
-
-    <h2>4. Intellectual Property and Trademark Non-Affiliation</h2>
-    <ul>
-      <li><strong>Independent Status:</strong> Personality Discovery (16personalities.eu) is an independent assessment platform. We are <strong>not affiliated with, endorsed by, sponsored by, or connected to</strong> The Myers &amp; Briggs Foundation, The Myers-Briggs Company (owners of the MBTI® and Myers-Briggs Type Indicator® trademarks), or NERIS Analytics Limited (operators of 16Personalities).</li>
-      <li><strong>Ownership of Content:</strong> All questionnaires, scoring algorithms, text, graphics, user interface designs, premium report templates, and branding on this website are the exclusive intellectual property of [Your Company Legal Name] and its licensors, protected under international copyright and trademark laws.</li>
-      <li><strong>Limited License:</strong> Upon purchasing a premium report, you are granted a personal, non-exclusive, non-transferable, revocable license to view and download the report solely for your personal, non-commercial use. You may not resell, redistribute, scrape, reproduce, or commercially exploit any assessment questions or paid content.</li>
-    </ul>
-
-    <h2>5. One-Time Fees, Payments, and Billing</h2>
-    <ul>
-      <li><strong>Pricing:</strong> Prices for premium personality reports, bundle packages, and 1-on-1 consultant sessions are displayed clearly prior to checkout and are inclusive or exclusive of applicable VAT/sales taxes as indicated at checkout.</li>
-      <li><strong>One-Time Payment Model:</strong> Unless explicitly stated otherwise at checkout, paid reports and single consultations are billed as a one-time, non-recurring fee. You will not be enrolled in an automatic recurring subscription without your explicit opt-in consent.</li>
-      <li><strong>Third-Party Payment Processors:</strong> Payments are processed securely through third-party payment gateways (such as Stripe or PayPal). We do not store your full credit card or banking credentials on our servers.</li>
-    </ul>
-
-    <h2>6. Digital Content Delivery and Refund Policy</h2>
-    <ul>
-      <li><strong>Immediate Digital Access:</strong> Paid personality reports and digital advice guides are generated and delivered electronically immediately upon payment confirmation.</li>
-      <li><strong>Statutory Right of Withdrawal Waiver (EU/UK Consumers):</strong> By purchasing immediate access to digital content (your unlocked report) and expressly consenting to immediate performance at checkout, you acknowledge that you waive your statutory 14-day right of withdrawal once generation and delivery of the digital report begins, in accordance with Article 16(m) of the EU Consumer Rights Directive (2011/83/EU) and UK Consumer Contracts Regulations.</li>
-      <li><strong>Technical Defects:</strong> If a technical error prevents you from accessing your purchased report, contact us at [support@16personalities.eu] within 14 days of purchase so we can restore access or issue a full refund.</li>
-    </ul>
-
-    <h2>7. Terms Specific to 1-on-1 Personal Consultations</h2>
-    <p>If you purchase a session with a personal consultant, the following additional rules apply:</p>
-    <ul>
-      <li><strong>Scope of Consultation:</strong> Consultants act strictly as personal development guides and typology educators. They do not act as licensed therapists, counselors, or medical practitioners.</li>
-      <li><strong>Scheduling and Rescheduling:</strong> Sessions must be scheduled within 60 days of purchase unless otherwise agreed. You may reschedule a booked session free of charge up to <strong>24 hours</strong> before the scheduled start time.</li>
-      <li><strong>Late Arrivals and No-Shows:</strong> If you are more than 15 minutes late to a scheduled session or fail to attend without at least 24 hours' prior notice, the session is forfeited and non-refundable. If a consultant cancels or is unavailable, you will be offered a priority reschedule or a 100% refund for the unused session.</li>
-      <li><strong>Respectful Conduct:</strong> We maintain a zero-tolerance policy for abusive, harassing, sexually explicit, or threatening behavior toward our consultants. A consultant may terminate a session immediately without refund if you engage in inappropriate conduct.</li>
-    </ul>
-
-    <h2>8. User Conduct and Prohibited Uses</h2>
-    <p>You agree not to:</p>
-    <ul>
-      <li>Use automated scripts, bots, or scrapers to extract questions, scoring logic, or site content.</li>
-      <li>Reverse-engineer, decompile, or attempt to discover the underlying scoring algorithms of the Service.</li>
-      <li>Impersonate another person or submit false payment or identity details.</li>
-      <li>Record audio or video of a 1-on-1 consultation without the explicit prior written consent of the consultant.</li>
-    </ul>
-
-    <h2>9. Disclaimer of Warranties</h2>
-    <p>To the maximum extent permitted by applicable law, the Service, assessment results, written advice, and consultations are provided on an <strong>"AS IS" and "AS AVAILABLE"</strong> basis without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, accuracy, or non-infringement. We do not guarantee that your test results will remain identical over time or yield specific career, financial, or personal outcomes.</p>
-
-    <h2>10. Limitation of Liability</h2>
-    <p>To the fullest extent permitted by applicable law:</p>
-    <ul>
-      <li>[Your Company Legal Name], its directors, employees, contractors, and consultants shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, loss of data, emotional distress, or personal/career decisions made based on your test results or consultation sessions.</li>
-      <li>Our total aggregate liability arising out of or relating to these Terms or your use of the Service shall not exceed the total amount actually paid by you to us in the six (6) months immediately preceding the event giving rise to the claim, or EUR €50, whichever is greater.</li>
-      <li>Nothing in these Terms excludes or limits liability for death or personal injury caused by negligence, fraud, fraudulent misrepresentation, or any other liability that cannot be excluded under applicable consumer law.</li>
-    </ul>
-
-    <h2>11. Indemnification</h2>
-    <p>You agree to indemnify, defend, and hold harmless [Your Company Legal Name] and its affiliates, officers, agents, and consultants from any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of your breach of these Terms, misuse of the Service, or violation of any third-party rights.</p>
-
-    <h2>12. Governing Law and Dispute Resolution</h2>
-    <p>These Terms shall be governed by and construed in accordance with the laws of [Governing Country/Jurisdiction, e.g., England and Wales / Ireland / Estonia], without regard to conflict-of-law principles. If you are a consumer residing in the European Union or the United Kingdom, you also retain the benefit of any mandatory consumer protection provisions of the law of your country of residence. Any disputes that cannot be resolved amicably via [support@16personalities.eu] shall be submitted to the competent courts of [Jurisdiction].</p>
-
-    <h2>13. Severability and Contact Information</h2>
-    <p>If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions shall remain in full force and effect. For legal notices, billing support, or consultation inquiries, contact us at:</p>
-    <p>
-      <strong>[Your Company Legal Name]</strong><br>
-      Email: [support@16personalities.eu]<br>
-      Address: [Registered Business Address]
-    </p>
-  </section>
-
-  <!-- PRIVACY POLICY VIEW -->
-  <section id="view-privacy" class="legal-page" aria-labelledby="privacy-heading">
-    <a href="#home" class="legal-back" onclick="openPage('home', event)">← Back to Personality Discovery</a>
-    <h1 id="privacy-heading">Privacy Policy</h1>
-    <div class="legal-meta">
-      <strong>Last Updated:</strong> November 24, 2026 &nbsp;|&nbsp; 
-      <strong>Data Controller:</strong> [Your Company Legal Name] &nbsp;|&nbsp; 
-      <strong>Contact:</strong> [privacy@16personalities.eu]
-    </div>
-
-    <p>Personality Discovery ("we", "us", "our") respects your privacy and is committed to protecting your personal data in compliance with the EU General Data Protection Regulation (GDPR), the UK GDPR, and applicable data protection laws. This Privacy Policy explains how we collect, use, store, and safeguard your information when you visit <strong>https://16personalities.eu/</strong>, take our assessment, purchase a report, or participate in a 1-on-1 consultation.</p>
-
-    <h2>1. Information We Collect</h2>
-    <ul>
-      <li><strong>Assessment &amp; Psychometric Response Data:</strong> Your answers to the 32 personality questions, calculated trait percentages, and resulting four-letter personality profile. You can complete the free test without creating an account or providing your name.</li>
-      <li><strong>Account &amp; Contact Information:</strong> When you purchase a premium report, request your results by email, or book a consultation, we collect your name, email address, and optional profile preferences.</li>
-      <li><strong>Transaction &amp; Billing Data:</strong> Records of purchased products, transaction IDs, currency, tax country/VAT status, and payment confirmation status. Full card numbers are collected and processed directly by our PCI-DSS compliant payment processors and never touch our servers.</li>
-      <li><strong>Consultation Information:</strong> Scheduling details, pre-session intake notes you voluntarily provide, and session attendance logs. Unless you explicitly request and consent to a recording, 1-on-1 consultations are not recorded by us.</li>
-      <li><strong>Technical &amp; Usage Data:</strong> IP address (anonymized where possible), browser type, device type, operating system, referring URLs, pages viewed, and session timestamps collected via essential cookies and privacy-focused analytics.</li>
-    </ul>
-
-    <h2>2. How We Use Your Information &amp; Legal Bases (GDPR Art. 6)</h2>
-    <ul>
-      <li><strong>Delivering the Assessment &amp; Paid Services (Contractual Necessity — Art. 6(1)(b)):</strong> Calculating your personality profile, generating your paid report, emailing your receipt/access link, and facilitating 1-on-1 consultant sessions.</li>
-      <li><strong>Customer Support &amp; Communications (Contractual Necessity / Legitimate Interests — Art. 6(1)(b) &amp; (f)):</strong> Responding to billing questions, rescheduling requests, and technical support tickets.</li>
-      <li><strong>Service Improvement &amp; Statistical Calibration (Legitimate Interests — Art. 6(1)(f)):</strong> Analyzing aggregated, de-identified question response distributions to improve scoring accuracy and user experience.</li>
-      <li><strong>Legal, Tax, and Fraud Prevention Compliance (Legal Obligation — Art. 6(1)(c)):</strong> Maintaining accounting and tax records required by law and preventing fraudulent transactions.</li>
-      <li><strong>Optional Updates &amp; Insights (Consent — Art. 6(1)(a)):</strong> Sending personality tips or product updates only if you have explicitly opted in. You may unsubscribe at any time.</li>
-    </ul>
-
-    <h2>3. Confidentiality of 1-on-1 Consultations</h2>
-    <p>Information shared during a 1-on-1 consultation is treated as strictly confidential between you and your assigned consultant. Consultants are bound by written confidentiality agreements and may only use your assessment results and intake notes to prepare for and conduct your session. We will never sell or publicly disclose personal details shared during a session, except where disclosure is required by law or necessary to prevent imminent physical harm.</p>
-
-    <h2>4. How We Share Your Information</h2>
-    <p>We <strong>never sell</strong> your personal data or personality test responses to data brokers or advertisers. We share data only with trusted service providers ("Data Processors") strictly necessary to operate our platform:</p>
-    <ul>
-      <li><strong>Payment Processors:</strong> (e.g., Stripe, PayPal) to securely process one-time payments and prevent fraud.</li>
-      <li><strong>Cloud Hosting &amp; Infrastructure:</strong> Secure servers hosting the website and encrypted report generation.</li>
-      <li><strong>Email &amp; Scheduling Providers:</strong> Transactional email services to deliver your report links and calendar tools to schedule consultations.</li>
-      <li><strong>Independent Personality Consultants:</strong> Provided only with the details needed to conduct your booked session (your first name, contact/meeting link, test results, and any intake notes you submit).</li>
-      <li><strong>Legal Authorities:</strong> If required by a valid court order, subpoena, or statutory obligation.</li>
-    </ul>
-
-    <h2>5. International Data Transfers</h2>
-    <p>Where any of our service providers process personal data outside the European Economic Area (EEA) or the United Kingdom, we ensure appropriate safeguards are in place, such as European Commission Standard Contractual Clauses (SCCs), the UK International Data Transfer Addendum, or adequacy decisions (including the EU-U.S. Data Privacy Framework).</p>
-
-    <h2>6. Cookies and Local Storage</h2>
-    <p>We use browser local storage and minimal cookies to:</p>
-    <ul>
-      <li>Temporarily preserve your test progress and unlocked report access in your browser.</li>
-      <li>Maintain security, load balancing, and fraud prevention during checkout.</li>
-      <li>Measure aggregate website traffic without invasive cross-site behavioral tracking.</li>
-    </ul>
-    <p>You can clear or block cookies and local storage at any time through your browser settings, though clearing local storage may require you to use your email access link to reopen a purchased report.</p>
-
-    <h2>7. Data Retention</h2>
-    <ul>
-      <li><strong>Anonymous Free Test Sessions:</strong> Stored temporarily in your browser or anonymized in aggregate statistical logs.</li>
-      <li><strong>Paid Reports &amp; Consultation Records:</strong> Retained for up to 24 months after your last interaction so you can re-access your report, unless you request earlier deletion.</li>
-      <li><strong>Financial &amp; Tax Invoices:</strong> Retained for 6 to 10 years as mandated by applicable statutory accounting and tax laws.</li>
-    </ul>
-
-    <h2>8. Your Privacy Rights</h2>
-    <p>Under the GDPR, UK GDPR, and similar privacy laws, you have the right to:</p>
-    <ul>
-      <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
-      <li><strong>Rectification:</strong> Correct inaccurate or incomplete personal information.</li>
-      <li><strong>Erasure ("Right to be Forgotten"):</strong> Request deletion of your personal data and assessment history, subject to statutory tax recordkeeping exceptions.</li>
-      <li><strong>Restriction &amp; Objection:</strong> Object to or restrict processing based on legitimate interests.</li>
-      <li><strong>Data Portability:</strong> Receive your assessment data in a structured, machine-readable format.</li>
-      <li><strong>Withdraw Consent:</strong> Withdraw marketing or optional processing consent at any time.</li>
-    </ul>
-    <p>To exercise any of these rights, email us at <strong>[privacy@16personalities.eu]</strong>. We will respond within 30 days. You also have the right to lodge a complaint with your local Data Protection Authority (such as the ICO in the UK or your national EU supervisory authority).</p>
-
-    <h2>9. Data Security and Children's Privacy</h2>
-    <p>We implement industry-standard technical and organizational safeguards, including HTTPS/TLS encryption in transit, access controls, and encrypted storage, to protect your data. Our services are not directed to children under 16, and we do not knowingly collect personal data from children under 16 without verifiable parental consent.</p>
-
-    <h2>10. Contact Us</h2>
-    <p>If you have questions about this Privacy Policy or how your data is handled, please contact our Data Protection contact at:</p>
-    <p>
-      <strong>[Your Company Legal Name]</strong><br>
-      Email: [privacy@16personalities.eu]<br>
-      Address: [Registered Business Address]
-    </p>
-  </section>
-
-  <footer class="footer">
-    © Personality Discovery · Discover more about yourself · 
-    <a href="#terms" onclick="openPage('terms', event)">Terms &amp; Conditions</a> · 
-    <a href="#privacy" onclick="openPage('privacy', event)">Privacy Policy</a>
-  </footer>
-
-  <script>
-    function openPage(page, event) {
-      if (event) event.preventDefault();
-
-      var homeView = document.getElementById('view-home');
-      var termsView = document.getElementById('view-terms');
-      var privacyView = document.getElementById('view-privacy');
-
-      homeView.style.display = 'none';
-      termsView.classList.remove('active');
-      privacyView.classList.remove('active');
-
-      if (page === 'terms') {
-        termsView.classList.add('active');
-        history.pushState(null, '', '#terms');
-      } else if (page === 'privacy') {
-        privacyView.classList.add('active');
-        history.pushState(null, '', '#privacy');
-      } else {
-        homeView.style.display = '';
-        history.pushState(null, '', window.location.pathname);
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+<script>
+const tokenFromServer = new URLSearchParams(location.search).get('token');
+const qs = new URLSearchParams(location.search);
+const err = document.getElementById('err');
+const payBtn = document.getElementById('payBtn');
+const overlay = document.getElementById('loading-overlay');
+const prices = {starter:'£22.95 GBP',premium:'£37.95 GBP'};
+function showError(message){err.textContent=message;err.setAttribute('aria-hidden','false');}
+function clearError(){err.textContent='';err.setAttribute('aria-hidden','true');}
+function loading(value){payBtn.disabled=value;overlay.setAttribute('aria-hidden',value?'false':'true');}
+async function jsonFetch(url, options){
+ const response=await fetch(url,{credentials:'same-origin',cache:'no-store',...options});
+ const data=await response.json().catch(()=>({}));
+ if(!response.ok)throw new Error(data.error||`Request failed (${response.status})`);
+ return data;
+}
+function applyParams(){
+ const title=qs.get('sub1');
+ if(title){
+  document.getElementById('productTitleTop').textContent=title;
+  document.getElementById('productTitleSide').textContent=title;
+  document.getElementById('summaryProductContainer').style.display='flex';
+ }
+ const image=qs.get('sub2');
+ if(image){
+  try{
+   const u=new URL(image,location.origin);
+   if(u.protocol==='https:'){
+    document.getElementById('productImageTop').src=u.href;
+    document.getElementById('productImageSide').src=u.href;
+    document.getElementById('productImageSide').style.display='block';
+    document.getElementById('summaryProductContainer').style.display='flex';
+   }
+  }catch(e){}
+ }
+ const name=[qs.get('sub3'),qs.get('sub4')].filter(Boolean).join(' ');
+ if(name)document.getElementById('cardholderName').value=name;
+ if(qs.get('sub9'))document.getElementById('emailInput').value=qs.get('sub9');
+ if(qs.get('sub10'))document.getElementById('phoneNumber').value=qs.get('sub10');
+ const nameInput=document.getElementById('cardholderName');
+ const preview=document.getElementById('previewName');
+ preview.textContent=name||'John Johnson';
+ nameInput.addEventListener('input',()=>preview.textContent=nameInput.value||'John Johnson');
+}
+async function waitForPaid(reference){
+ for(let i=0;i<12;i++){
+  const data=await jsonFetch('/api/stripe/payment-status?reference='+encodeURIComponent(reference));
+  if(data.status==='paid')return true;
+  if(['failed','canceled'].includes(data.status))throw new Error('Payment was not completed.');
+  await new Promise(resolve=>setTimeout(resolve,1500));
+ }
+ return false;
+}
+window.addEventListener('DOMContentLoaded',async()=>{
+ applyParams();
+ if(!tokenFromServer){
+  try{
+   const data=await jsonFetch('/api/create-promo-checkout-link',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+     plan:qs.get('plan')||'starter',assessmentId:qs.get('assessmentId'),sourcePage:location.pathname,
+     ref:qs.get('ref')||'',originalQueryString:location.search.slice(1)
+    })
+   });
+   const redirect=new URL(data.url,location.origin);
+   qs.forEach((value,key)=>redirect.searchParams.set(key,value));
+   location.replace(redirect.href);
+  }catch(e){showError(e.message);}
+  return;
+ }
+ try{
+  const [link,config]=await Promise.all([
+   jsonFetch('/api/checkout-link/'+encodeURIComponent(tokenFromServer)),
+   jsonFetch('/api/stripe/config')
+  ]);
+  const plan=link.plan;
+  if(!prices[plan])throw new Error('Invalid payment plan.');
+  document.querySelectorAll('[data-plan-price]').forEach(el=>el.textContent=prices[plan]);
+  payBtn.textContent='Pay '+prices[plan]+' now';
+  if(typeof Stripe!=='function')throw new Error('Unable to load Stripe.');
+  const stripe=Stripe(config.publishableKey);
+  const elements=stripe.elements();
+  const card=elements.create('card',{hidePostalCode:true,style:{base:{fontSize:'16px',color:'#1f2937'}}});
+  card.mount('#stripe-card-element');
+  card.on('change',event=>{if(event.error)showError(event.error.message);else clearError();});
+  payBtn.disabled=false;
+  payBtn.onclick=async()=>{
+   clearError();
+   const name=document.getElementById('cardholderName').value.trim();
+   const email=document.getElementById('emailInput').value.trim();
+   if(!name||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    showError('Please enter a valid name and email address.');return;
+   }
+   loading(true);
+   try{
+    const payment=await jsonFetch('/api/stripe/create-payment-intent',{
+     method:'POST',headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({plan,assessmentId:link.assessmentId})
+    });
+    const result=await stripe.confirmCardPayment(payment.clientSecret,{
+     payment_method:{card,billing_details:{name,email}}
+    });
+    if(result.error)throw new Error(result.error.message);
+    if(result.paymentIntent?.status!=='succeeded'){
+     throw new Error('Payment was not completed.');
     }
-
-    function syncRouteFromHash() {
-      var hash = window.location.hash;
-      var homeView = document.getElementById('view-home');
-      var termsView = document.getElementById('view-terms');
-      var privacyView = document.getElementById('view-privacy');
-
-      homeView.style.display = 'none';
-      termsView.classList.remove('active');
-      privacyView.classList.remove('active');
-
-      if (hash === '#terms') {
-        termsView.classList.add('active');
-      } else if (hash === '#privacy') {
-        privacyView.classList.add('active');
-      } else {
-        homeView.style.display = '';
-      }
+    if(await waitForPaid(payment.reference)){
+     location.assign('/results.html?id='+encodeURIComponent(link.assessmentId));
+    }else{
+     showError('Payment received. Activation is pending; please check your account shortly.');
     }
+   }catch(e){
+    if(/register or log in|log in|iniciar sesi[oó]n/i.test(e.message)){
+     showError('You must log in or create an account before paying.');
+    }else{showError(e.message);}
+   }finally{loading(false);}
+  };
+ }catch(e){showError(e.message);}
+});
+</script>
 
-    window.addEventListener('hashchange', syncRouteFromHash);
-    window.addEventListener('DOMContentLoaded', syncRouteFromHash);
-  </script>
 </body>
 </html>
