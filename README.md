@@ -41,3 +41,6 @@ Premium text is original, independently written, and does not reproduce 16Person
 ## Limitations before launch
 
 Add an account or secure email recovery flow, refund and legal pages, real consultation scheduling, customer support details, confirmation emails, and verify the API provider's commercial permissions and reliability. Test all Stripe webhook and 3DS paths in test mode before going live.
+
+## Customer accounts
+The existing DATABASE_URL is reused. Startup creates customer_accounts and customer_sessions and adds nullable account_id columns to assessments and purchases. No new environment variables are required. Set NODE_ENV=production for secure cookies. Customers select a plan, register or log in, then continue to checkout. Payment intent creation requires a valid customer session. Existing anonymous assessments can be claimed using their original assessment cookie. My account lists saved assessments. Email verification and password recovery are not included. Authentication throttling is per running instance.

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="sq" dir="ltr">
 <head><meta name="robots" content="noindex,nofollow">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Secure checkout — Personality Discovery</title>
+<title>Pagesë e Sigurt — Pagesë</title>
 
 <meta http-equiv="Content-Security-Policy" content="
 default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval';
@@ -14,7 +14,14 @@ style-src 'self' https: 'unsafe-inline';
 img-src * data: blob:;
 ">
 
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FDQ6REQWS8"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FDQ6REQWS8', { send_page_view: true });
+</script>
+<script src="https://api.goaffpro.com/loader.js?shop=nzyvwvfbde" type="text/javascript" async></script>
 
 <script src="https://js.stripe.com/v3/"></script>
 
@@ -191,21 +198,21 @@ sessionStorage.setItem("orig_qs", location.search.replace(/^\?/, ""));
 </script>
 
 <div class="top-bar">
-    <span>🔒 Secure payment via Stripe</span>
-    <span>Customer support available</span>
+    <span>🔒 Pagesë e sigurt përmes Stripe</span>
+    <span>Mbështetja e klientit e disponueshme</span>
 </div>
 
 <div class="wrap">
 
     <div class="header-card">
         <div class="header-left">
-            <img id="productImageTop" class="product-image" alt="Product image" />
+            <img id="productImageTop" class="product-image" alt="Imazhi i produktit" />
             <div>
-                <h1 id="productTitleTop" class="header-title">Complete your order</h1>
-                <p style="margin:4px 0 0; color:var(--muted); font-size:14px;">Please enter your details below to finish.</p>
+                <h1 id="productTitleTop" class="header-title">Plotësoni porosinë tuaj</h1>
+                <p style="margin:4px 0 0; color:var(--muted); font-size:14px;">Ju lutemi jepni të dhënat tuaja më poshtë për të përfunduar.</p>
             </div>
         </div>
-        <div class="header-price-tag" data-plan-price>£22.95 GBP</div>
+        <div class="header-price-tag" data-plan-price>240,00 ALL</div>
     </div>
 
     <div class="checkout-grid">
@@ -218,21 +225,21 @@ sessionStorage.setItem("orig_qs", location.search.replace(/^\?/, ""));
             <form id="cart-form" onsubmit="return false;">
                 
                 <div class="field-group">
-                    <label class="label-text">Cardholder name</label>
+                    <label class="label-text">Emri i mbajtësit të kartës</label>
                     <input id="cardholderName" class="input" placeholder="{firstname} {lastname}" required>
                 </div>
 
                 <div class="field-group">
-                    <label class="label-text">Card number</label>
+                    <label class="label-text">Numri i kartës</label>
                     <div id="stripe-card-element" class="gateway-field"></div>
                 </div>
                 <div class="field-group">
-                    <label class="label-text">Email address</label>
+                    <label class="label-text">Adresa e email-it</label>
                     <input id="emailInput" class="input" type="email" placeholder="{email}" required>
                 </div>
 
                 <div class="field-group">
-                    <label class="label-text">Phone number</label>
+                    <label class="label-text">Numri i telefonit</label>
                     <input id="phoneNumber" class="input" placeholder="{phone}" required>
                 </div>
 
@@ -240,7 +247,7 @@ sessionStorage.setItem("orig_qs", location.search.replace(/^\?/, ""));
                 <input id="firstName" type="hidden">
                 <input id="lastName" type="hidden">
 
-                <button type="button" id="payBtn" class="btn-submit" disabled>Pay £22.95 GBP now</button>
+                <button type="button" id="payBtn" class="btn-submit" disabled>Paguaj 240,00 ALL tani</button>
             </form>
         </div>
 
@@ -251,45 +258,45 @@ sessionStorage.setItem("orig_qs", location.search.replace(/^\?/, ""));
                 <!-- Mini Card Graphic preview -->
                 <div class="mini-card">
                     <div class="mini-card-top">
-                        <span>Secure card</span>
+                        <span>Kartë e sigurt</span>
                         <span>💳</span>
                     </div>
                     <div class="mini-card-num">•••• •••• •••• ••••</div>
                     <div class="mini-card-btm">
                         <div>
-                            <div style="font-size:9px; opacity:0.7;">CARDHOLDER</div>
+                            <div style="font-size:9px; opacity:0.7;">MBAJTËSI</div>
                             <div id="previewName" style="font-weight:700;">John Johnson</div>
                         </div>
                         <div>
-                            <div style="font-size:9px; opacity:0.7;">EXPIRES</div>
+                            <div style="font-size:9px; opacity:0.7;">SKADON</div>
                             <div id="previewExpiry" style="font-weight:700;">MM/YY</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="summary-title">Order summary</div>
+                <div class="summary-title">Përmbledhja e porosisë</div>
                 
                 <!-- Summary Product Item Details -->
                 <div id="summaryProductContainer" class="summary-product" style="display: none;">
-                    <img id="productImageSide" class="summary-product-img" alt="Product" />
+                    <img id="productImageSide" class="summary-product-img" alt="Produkti" />
                     <div id="productTitleSide" class="summary-product-title"></div>
                 </div>
 
                 <div class="summary-row">
-                    <span>Your total</span>
-                    <span data-plan-price>£22.95 GBP</span>
+                    <span>Totali juaj</span>
+                    <span data-plan-price>240,00 ALL</span>
                 </div>
                 <div class="summary-row">
-                    <span>VAT / Taxes</span>
-                    <span>Included</span>
+                    <span>TVSH / Tatimet</span>
+                    <span>Të përfshira</span>
                 </div>
                 <div class="summary-row total">
-                    <span>Total amount</span>
-                    <span data-plan-price>£22.95 GBP</span>
+                    <span>Shuma totale</span>
+                    <span data-plan-price>240,00 ALL</span>
                 </div>
 
                 <div style="margin-top:20px; font-size:11px; color:var(--muted); text-align:center; line-height:1.4;">
-                    Card details are securely processed through Stripe-hosted fields.
+                    Të dhënat e kartës përpunohen në mënyrë të sigurt përmes fushave të strehuara nga Stripe.
                 </div>
             </div>
         </div>
@@ -300,19 +307,19 @@ sessionStorage.setItem("orig_qs", location.search.replace(/^\?/, ""));
 
 <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
 <div class="loading-box">
-<div class="loading-title">Processing payment…</div>
+<div class="loading-title">Duke përpunuar pagesën…</div>
 <div class="progress-wrap"><div class="progress-bar"></div></div>
-<p class="sub" style="margin-top:10px">Please keep this window open…</p>
+<p class="sub" style="margin-top:10px">Ju lutemi mbajeni këtë dritare hapur…</p>
 </div>
 </div>
 
 <script>
-const tokenFromServer = new URLSearchParams(location.search).get('token');
+const tokenFromServer = window.PROMO_CHECKOUT_TOKEN || null;
 const qs = new URLSearchParams(location.search);
 const err = document.getElementById('err');
 const payBtn = document.getElementById('payBtn');
 const overlay = document.getElementById('loading-overlay');
-const prices = {starter:'£22.95 GBP',premium:'£37.95 GBP'};
+const prices = {starter:'£22.95 GBP',premium:'£26.95 GBP',ultimate:'240,00 ALL'};
 function showError(message){err.textContent=message;err.setAttribute('aria-hidden','false');}
 function clearError(){err.textContent='';err.setAttribute('aria-hidden','true');}
 function loading(value){payBtn.disabled=value;overlay.setAttribute('aria-hidden',value?'false':'true');}
@@ -354,7 +361,7 @@ async function waitForPaid(reference){
  for(let i=0;i<12;i++){
   const data=await jsonFetch('/api/stripe/payment-status?reference='+encodeURIComponent(reference));
   if(data.status==='paid')return true;
-  if(['failed','canceled'].includes(data.status))throw new Error('Payment was not completed.');
+  if(['failed','canceled'].includes(data.status))throw new Error('Pagesa nuk u kompletua.');
   await new Promise(resolve=>setTimeout(resolve,1500));
  }
  return false;
@@ -366,7 +373,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
    const data=await jsonFetch('/api/create-promo-checkout-link',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-     plan:qs.get('plan')||'starter',assessmentId:qs.get('assessmentId'),sourcePage:location.pathname,
+     plan:'3795',step2File:'xo-dif-al1.html',sourcePage:location.pathname,
      ref:qs.get('ref')||'',originalQueryString:location.search.slice(1)
     })
    });
@@ -382,10 +389,11 @@ window.addEventListener('DOMContentLoaded',async()=>{
    jsonFetch('/api/stripe/config')
   ]);
   const plan=link.plan;
-  if(!prices[plan])throw new Error('Invalid payment plan.');
+  if(link.email)document.getElementById('emailInput').value=link.email;
+  if(!prices[plan])throw new Error('Plan pagese i pavlefshëm.');
   document.querySelectorAll('[data-plan-price]').forEach(el=>el.textContent=prices[plan]);
-  payBtn.textContent='Pay '+prices[plan]+' now';
-  if(typeof Stripe!=='function')throw new Error('Unable to load Stripe.');
+  payBtn.textContent='Paguaj '+prices[plan]+' tani';
+  if(typeof Stripe!=='function')throw new Error('Nuk u mundësua ngarkimi i Stripe.');
   const stripe=Stripe(config.publishableKey);
   const elements=stripe.elements();
   const card=elements.create('card',{hidePostalCode:true,style:{base:{fontSize:'16px',color:'#1f2937'}}});
@@ -397,29 +405,29 @@ window.addEventListener('DOMContentLoaded',async()=>{
    const name=document.getElementById('cardholderName').value.trim();
    const email=document.getElementById('emailInput').value.trim();
    if(!name||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-    showError('Please enter a valid name and email address.');return;
+    showError('Ju lutemi vendosni një emër dhe adresë email-i të vlefshme.');return;
    }
    loading(true);
    try{
     const payment=await jsonFetch('/api/stripe/create-payment-intent',{
      method:'POST',headers:{'Content-Type':'application/json'},
-     body:JSON.stringify({plan,assessmentId:link.assessmentId})
+     body:JSON.stringify({plan})
     });
     const result=await stripe.confirmCardPayment(payment.clientSecret,{
      payment_method:{card,billing_details:{name,email}}
     });
     if(result.error)throw new Error(result.error.message);
     if(result.paymentIntent?.status!=='succeeded'){
-     throw new Error('Payment was not completed.');
+     throw new Error('Pagesa nuk u kompletua.');
     }
     if(await waitForPaid(payment.reference)){
      location.assign('/results.html?id='+encodeURIComponent(link.assessmentId));
     }else{
-     showError('Payment received. Activation is pending; please check your account shortly.');
+     showError('Pagesa u mor. Aktivizimi është në pritje; ju lutemi kontrolloni llogarinë tuaj pas pak.');
     }
    }catch(e){
     if(/register or log in|log in|iniciar sesi[oó]n/i.test(e.message)){
-     showError('You must log in or create an account before paying.');
+     showError('Duhet të hyni në llogari ose të krijoni një para se të paguani.');
     }else{showError(e.message);}
    }finally{loading(false);}
   };
