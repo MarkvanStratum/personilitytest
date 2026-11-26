@@ -1,3 +1,4 @@
+import {readFileSync} from 'node:fs';
 import express from 'express';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -7,6 +8,7 @@ import pg from 'pg';
 import {fileURLToPath} from 'node:url';
 const app=express();app.disable('x-powered-by');app.set('trust proxy',1);
 const root=path.dirname(fileURLToPath(import.meta.url));
+const extendedReports=JSON.parse(readFileSync(path.join(root,'extended-reports.json'),'utf8'));
 const stripe=process.env.STRIPE_SECRET_KEY?new Stripe(process.env.STRIPE_SECRET_KEY):null;
 const db=process.env.DATABASE_URL?new pg.Pool({connectionString:process.env.DATABASE_URL,ssl:process.env.DATABASE_SSL==='disable'?false:{rejectUnauthorized:true}}):null;
 const BASE='https://personality.fyi/api/v1';
@@ -49,7 +51,7 @@ async function assessment(req,res,next){try{const secret=req.cookies.assessment_
 async function paid(id){const r=await query("SELECT plan FROM purchases WHERE assessment_id=$1 AND status='paid'",[id]);return {starter:r.rows.some(x=>['starter','premium'].includes(x.plan)),premium:r.rows.some(x=>x.plan==='premium')}}
 function admin(req){const secret=process.env.ADMIN_PREVIEW_SECRET;return !!(secret&&secret.length>=20&&req.headers['x-admin-preview']&&crypto.timingSafeEqual(Buffer.from(hash(String(req.headers['x-admin-preview']))),Buffer.from(hash(secret))))}
 app.get('/api/assessment/:id',assessment,async(req,res,next)=>{try{const a=req.assessment;res.json({id:a.id,type:a.type,score:a.score,profile:a.profile,entitlements:await paid(a.id)})}catch(e){next(e)}});
-app.get('/api/report/:id',assessment,async(req,res,next)=>{try{const ent=await paid(req.assessment.id);const preview=admin(req);if(!ent.starter&&!preview)return res.status(402).json({error:'Purchase required'});res.json({type:req.assessment.type,tier:ent.premium||preview?'premium':'starter',preview:preview&&!ent.starter})}catch(e){next(e)}});
+app.get('/api/report/:id',assessment,async(req,res,next)=>{try{const ent=await paid(req.assessment.id);const preview=admin(req);if(!ent.starter&&!preview)return res.status(402).json({error:'Purchase required'});res.json({type:req.assessment.type,tier:ent.premium||preview?'premium':'starter',preview:preview&&!ent.starter,sections:extendedReports[req.assessment.type]||[]})}catch(e){next(e)}});
 app.get('/api/plans',(_req,res)=>res.json({currency:'GBP',checkout_enabled:!!stripe,plans:Object.entries(PLANS).map(([id,x])=>({id,name:x.name,price_pence:x.amount,available:true}))}));
 app.get('/api/stripe/config',(_req,res)=>{if(!process.env.STRIPE_PUBLISHABLE_KEY)return res.status(503).json({error:'Stripe not configured'});res.json({publishableKey:process.env.STRIPE_PUBLISHABLE_KEY})});
 // External checkout contract is unchanged: /c/:token injects the token only.
